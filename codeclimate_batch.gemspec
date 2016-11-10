@@ -9,5 +9,6 @@ Gem::Specification.new name, CodeclimateBatch::VERSION do |s|
   s.files = `git ls-files lib/ bin/ MIT-LICENSE`.split("\n")
   s.license = "MIT"
   s.add_runtime_dependency "json"
+  s.add_dependency 'codeclimate-test-reporter', '~> 1.0.0'
   s.executables = ["codeclimate-batch"]
 end

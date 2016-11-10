@@ -31,6 +31,9 @@ codeclimate-batch --groups 4
 
 # custom key (when not using travis), must be the same on all hosts
 codeclimate-batch --groups 4 --key my-app/$BUILD_NUMBER
+
+# use your own host for cc-ammend
+codeclimate-batch --groups 4 --host https://pt-cc-amend.herokuapp.com
 ```
 
 Author

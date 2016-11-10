@@ -8,7 +8,6 @@ module CodeclimateBatch
     def start
       return if travis? && (outside_default_branch? && !pull_request?)
       ENV['CODECLIMATE_TO_FILE'] = '1' # write results to file since we need to combine them before sending
-      gem 'codeclimate-test-reporter', '>= 0.4.8' # get CODECLIMATE_TO_FILE support and avoid deprecations
       require 'codeclimate-test-reporter'
       CodeClimate::TestReporter.start
     end
@@ -17,9 +16,10 @@ module CodeclimateBatch
       initial, *rest = coverage_files
       report = load(initial)
       rest.each do |file|
-        merge_source_files(report.fetch("source_files"), load(file).fetch("source_files"))
+        report.merge!(load(file))
+        # merge_source_files(report.fetch("source_files"), load(file).fetch("source_files"))
       end
-      recalculate_counters(report)
+      # recalculate_counters(report)
       report
     end
 

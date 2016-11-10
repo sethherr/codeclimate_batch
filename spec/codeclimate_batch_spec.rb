@@ -112,12 +112,14 @@ describe CodeclimateBatch do
   describe ".unify" do
     it "merges reports 1 report" do
       report = CodeclimateBatch.unify(["spec/files/report_a.json"])
-      report["line_counts"].should == {"total" => 18, "covered" => 7, "missed" => 3}
+
+      report.should == {"Unit Tests":{"coverage":{"/sample.rb":[1,1,1],"/another_file.rb":[1,1,1]}}}
     end
 
     it "merges multiple reports" do
       report = CodeclimateBatch.unify(["spec/files/report_a.json", "spec/files/report_b.json"])
-      report["line_counts"].should == {"total" => 18, "covered" => 9, "missed" => 1}
+
+      report.should == {"Unit Tests":{"coverage":{"/sample.rb":[1,1,2],"/another_file.rb":[1,2,2]}}}
     end
   end
 
